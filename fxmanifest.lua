@@ -1,30 +1,22 @@
-fx_version 'adamant'
-
+fx_version 'cerulean'
 game 'gta5'
 
-description 'ESX LS Customs'
+lua54 'yes'
 
+description 'ESX LS Customs'
 version '2.1.0'
 
 server_scripts {
-	'@mysql-async/lib/MySQL.lua',
+	'@oxmysql/lib/MySQL.lua',
 	'@es_extended/locale.lua',
-	'locales/en.lua',
-	'locales/fr.lua',
-	'locales/pl.lua',
-	'locales/br.lua',
-	'locales/de.lua',
+	'locales/*.lua',
 	'config.lua',
 	'server/main.lua'
 }
 
 client_scripts {
 	'@es_extended/locale.lua',
-	'locales/en.lua',
-	'locales/fr.lua',
-	'locales/pl.lua',
-	'locales/br.lua',
-	'locales/de.lua',
+	'locales/*.lua',
 	'config.lua',
 	'client/main.lua'
 }
