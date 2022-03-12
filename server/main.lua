@@ -1,11 +1,14 @@
-ESX = nil
 local Vehicles
+ESX = nil
 
-TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+TriggerEvent('esx:getSharedObject', function(obj)
+	ESX = obj
+end)
 
 RegisterNetEvent('esx_lscustom:buyMod', function(price)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
+
 	price = tonumber(price)
 
 	if Config.IsMechanicJobOnly then
@@ -18,6 +21,7 @@ RegisterNetEvent('esx_lscustom:buyMod', function(price)
 		if price < societyAccount.money then
 			TriggerClientEvent('esx_lscustom:installMod', _source)
 			TriggerClientEvent('esx:showNotification', _source, _U('purchased'))
+
 			societyAccount.removeMoney(price)
 		else
 			TriggerClientEvent('esx_lscustom:cancelInstallMod', _source)
@@ -27,6 +31,7 @@ RegisterNetEvent('esx_lscustom:buyMod', function(price)
 		if price < xPlayer.getMoney() then
 			TriggerClientEvent('esx_lscustom:installMod', _source)
 			TriggerClientEvent('esx:showNotification', _source, _U('purchased'))
+
 			xPlayer.removeMoney(price)
 		else
 			TriggerClientEvent('esx_lscustom:cancelInstallMod', _source)
@@ -61,7 +66,7 @@ ESX.RegisterServerCallback('esx_lscustom:getVehiclesPrices', function(source, cb
 		MySQL.query('SELECT * FROM vehicles', {}, function(result)
 			local vehicles = {}
 
-			for i=1, #result, 1 do
+			for i = 1, #result, 1 do
 				table.insert(vehicles, {
 					model = result[i].model,
 					price = result[i].price
@@ -69,6 +74,7 @@ ESX.RegisterServerCallback('esx_lscustom:getVehiclesPrices', function(source, cb
 			end
 
 			Vehicles = vehicles
+			
 			cb(Vehicles)
 		end)
 	else
